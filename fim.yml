@@ -1,0 +1,41 @@
+releases:
+- name: fim
+  version: 1.3.4
+addons:
+- name: fim-trusty
+  jobs:
+  - name: fim
+    release: fim
+    properties: {}
+  include:
+    stemcell:
+    - os: ubuntu-trusty
+- name: fim-xenial
+  jobs:
+  - name: fim
+    release: fim
+    properties:
+      fim:
+        dirs:
+          #System Binaries and configuration
+          - /bin
+          - /etc
+          - /lib
+          - /lib32 #xenial-specific
+          - /lib64
+          - /opt
+          - /sbin
+          - /srv
+          - /usr
+          - /var/lib
+
+          #Bosh Agent
+          - /var/vcap/bosh
+          - /var/vcap/monit/job
+
+          #Bosh Releases
+          - /var/vcap/data/packages
+          - /var/vcap/data/jobs
+  include:
+    stemcell:
+    - os: ubunutu-xenial
